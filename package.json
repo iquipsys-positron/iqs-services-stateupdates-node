@@ -1,0 +1,79 @@
+{
+    "name": "iqs-services-stateupdates-node",
+    "version": "1.0.0",
+    "author": "Conceptual Vision Consulting LLC",
+    "description": "StateUpdates microservice in Node.js",
+    "contributors": [
+        {
+            "name": "Sergey Seroukhov",
+            "email": "seroukhov@gmail.com"
+        }
+    ],
+    "main": "./obj/src/index.js",
+    "typings": "./obj/src/index.d.ts",
+    "keywords": [
+        "iquipsys",
+        "positron",
+        "state",
+        "updates",
+        "microservice"
+    ],
+    "noAnalyze": true,
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:iquipsys-positron/iqs-services-stateupdates-node.git"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": ">=0.6.14"
+    },
+    "private": false,
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch",
+        "launch": "node run",
+        "relaunch": "tsc && node run",
+        "test": "mocha -t 5000 -R spec -u tdd --recursive ./obj/test",
+        "retest": "tsc && mocha -t 5000 -R spec -u tdd --recursive ./obj/test",
+        "benchmark": "matcha -R clean -I tdd ./obj/benchmark/run.js",
+        "rebenchmark": "tsc && matcha -R clean -I tdd ./obj/benchmark/run.js"
+    },
+    "dependencies": {
+        "geojson-utils": "^1.1.0",
+        "moment-timezone": "^0.5.13",
+        "pip-services3-commons-node": "^3.0.0",
+        "pip-services3-components-node": "^3.0.0",
+        "pip-services3-container-node": "^3.0.0",
+        "pip-services3-data-node": "^3.0.0",
+        "pip-services3-aws-node": "^3.0.0",
+        "pip-services3-rpc-node": "^3.0.0",
+        "pip-services3-mongodb-node": "^3.0.0",
+        "pip-clients-statistics-node": "^1.0.0",
+        "pip-clients-organizations-node": "^1.0.0",
+        "pip-clients-positions-node": "^1.0.0",
+        "pip-clients-routeanalysis-node": "^1.0.0",
+        "pip-clients-transducerdata-node": "^1.0.0",
+        "iqs-clients-controlobjects-node": "^1.0.0",
+        "iqs-clients-currobjectstates-node": "^1.0.0",
+        "iqs-clients-currdevicestates-node": "^1.0.0",
+        "iqs-clients-devices-node": "^1.0.0",
+        "iqs-clients-dataprofiles-node": "^1.0.0",
+        "iqs-clients-deviceprofiles-node": "^1.0.0",
+        "iqs-clients-objectstates-node": "^1.0.0",
+        "iqs-clients-attendance-node": "^1.0.0",
+        "iqs-clients-rosters-node": "^1.0.0",
+        "iqs-clients-zones-node": "^1.0.0",
+        "iqs-clients-eventgeneration-node": "^1.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "*",
+        "@types/lodash": "^4.0.0",
+        "@types/async": "^2.0.0",
+        "@types/chai": "*",
+        "@types/mocha": "*",
+        "@types/mongodb": "^2.1.38",
+        "restify": "^4.3.0",
+        "chai": "*",
+        "mocha": "*"
+    }
+}

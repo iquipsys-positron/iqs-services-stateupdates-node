@@ -1,0 +1,6 @@
+{
+  "name": "iqs-services-stateupdates-node",
+  "registry": "registry.gitlab.com/iqs-services",
+  "version": "1.0.0",
+  "build": 29
+}

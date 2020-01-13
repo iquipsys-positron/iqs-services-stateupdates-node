@@ -1,0 +1,68 @@
+before_script:
+  - rm -rf ./tasks
+  - git clone git@gitlab.com:iqs-management/iqs-devops-buildtasks.git tasks
+
+stages:
+  - build
+  - stage-deploy
+  - prod-deploy
+
+build:
+  stage: build
+  script:
+  - echo "Build the app"
+  - ./tasks/increment.ps1
+  - ./build.ps1
+  - ./test.ps1
+  - ./package.ps1
+  - ./tag.ps1
+  - ./publish.ps1
+  - ./release.ps1
+  after_script:
+  - ./clean.ps1  
+  artifacts:
+    paths:
+    - component.json
+  only:
+  - master
+  
+stage_deploy:
+  stage: stage-deploy
+  script:
+  - echo "Deploy into staging environment"
+  - ./tasks/deploy.ps1
+  - ./tasks/validate.ps1
+  - ./tasks/promote.ps1
+  after_script:
+  - ./tasks/rollback.ps1
+  - ./tasks/clean.ps1
+  variables:
+    ENVIRONMENT: stage
+  environment:
+    name: stage
+    url: https://www.positron.stage.iquipsys.net
+  dependencies:
+  - build
+  when: manual
+  only:
+  - master
+
+prod_deploy:
+  stage: prod-deploy
+  script:
+  - echo "Deploy into production environment"
+  - ./tasks/deploy.ps1
+  - ./tasks/validate.ps1
+  after_script:
+  - ./tasks/rollback.ps1
+  - ./tasks/clean.ps1
+  variables:
+    ENVIRONMENT: prod
+  environment:
+    name: prod
+    url: https://www.positron.iquipsys.net
+  dependencies:
+  - build
+  when: manual
+  only:
+  - master
